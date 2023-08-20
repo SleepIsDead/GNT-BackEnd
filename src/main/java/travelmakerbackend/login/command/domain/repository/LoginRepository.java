@@ -1,12 +1,8 @@
 package travelmakerbackend.login.command.domain.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-import travelmakerbackend.login.command.domain.aggregate.entity.LoginEntity;
+import travelmakerbackend.member.command.domain.aggregate.entity.Member;
 
-@Repository
-public
-interface LoginRepository extends JpaRepository<LoginEntity, Integer> {
-
+public interface LoginRepository extends JpaRepository<Member, Long> {
 }
 
