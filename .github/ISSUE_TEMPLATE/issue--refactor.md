@@ -1,12 +1,11 @@
 ---
-name: Custom issue template
-about: Describe this issue template's purpose here.
+name: 'Issue: REFACTOR'
+about: Suggest an idea for this project
 title: ''
 labels: ''
 assignees: ''
 
 ---
-
 # Issue: 🐵FEATURE
 
 ## 🎈Description
