@@ -20,7 +20,7 @@
 | <center>[@youyeul301](https://github.com/youyeul301)                             |<center>[@devJaem](https://github.com/devJaem)|
 |FRONTEND|BACKEND|
 ---
-# [FRONTEND]
+# [BACKEND]
 --- 
 ## Getting Started Guide
 ### 요구사항
