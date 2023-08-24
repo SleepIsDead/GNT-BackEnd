@@ -1,11 +1,12 @@
 ---
 name: 'Issue: DOCS'
 about: Suggest an idea for this project
-title: ''
+title: "[DOCS][Doamin] 제목"
 labels: ''
 assignees: ''
 
 ---
+
 # Issue: 🐵DOCS
 
 ## 🎈Description

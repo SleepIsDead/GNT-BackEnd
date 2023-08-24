@@ -1,11 +1,12 @@
 ---
 name: 'Issue: REFACTOR'
 about: Suggest an idea for this project
-title: ''
+title: "[REFACTOR][Doamin] 제목"
 labels: ''
 assignees: ''
 
 ---
+
 # Issue: 🐵FEATURE
 
 ## 🎈Description

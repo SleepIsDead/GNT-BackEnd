@@ -1,11 +1,12 @@
 ---
 name: 'Issue: BUGFIX'
 about: Suggest an idea for this project
-title: ''
+title: "[BUGFIX][Doamin] 제목"
 labels: ''
 assignees: ''
 
 ---
+
 # Issue: 🐵BUGFIX
 
 ## 🎈Description
