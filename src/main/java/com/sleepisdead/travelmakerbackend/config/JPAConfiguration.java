@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Configuration
 @EntityScan(basePackages = "com/sleepisdead/travelmakerbackend")
-@EnableJpaRepositories(basePackages = "travelmakerbackend")
+@EnableJpaRepositories(basePackages = "com.sleepisdead.travelmakerbackend")
 public class JPAConfiguration {
 
 }

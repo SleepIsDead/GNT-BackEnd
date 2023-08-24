@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-import travelmakerbackend.login.command.application.dto.*;
 import com.sleepisdead.travelmakerbackend.login.repository.LoginRepository;
 
 import java.time.LocalDateTime;

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
-@ComponentScan(basePackages = "travelmakerbackend")
+@ComponentScan(basePackages = "com.sleepisdead.travelmakerbackend")
 public class BeanConfiguration {
 
     @Bean
