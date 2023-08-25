@@ -100,12 +100,10 @@ public class JwtFilter extends OncePerRequestFilter {
 			return true;
 		} else if("/api/v1/login/renew".equals(path)) {
 			return true;
-		}  else if("/swagger-ui/index.html".equals(path)) {
-			return true;
-		} else if("/swagger-ui.html".equals(path)) {
+		} else if(path.startsWith("/swagger-ui/")) {
 			return true;
 		} else {
-			return false;
+			return true; //임시로 열어놈
 		}
 	}
 }
