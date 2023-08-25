@@ -22,6 +22,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
             .title("travelmakerbackend API")
             .description("spring boot swagger")
+            .version("1.0")
             .build();
     }
 
@@ -31,11 +32,11 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
             .consumes(getConsumeContentTypes())
             .produces(getProduceContentTypes())
-            .apiInfo(swaggerInfo())
             .select()
             .apis(RequestHandlerSelectors.basePackage("com/sleepisdead/travelmakerbackend"))
             .paths(PathSelectors.any())
             .build()
+            .apiInfo(swaggerInfo())
             .useDefaultResponseMessages(false);
     }
 

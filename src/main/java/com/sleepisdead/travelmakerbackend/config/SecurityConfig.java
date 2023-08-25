@@ -60,11 +60,9 @@ public class SecurityConfig {
 			.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 			.antMatchers("/api/v1/login/**").permitAll()
 			.antMatchers(
-				"/swagger-ui/index.html",
-				"/swagger/**",
-				"/v1/api-docs",
-				"/swagger-resources/**",
-				"/webjars/**"
+					/* swagger v3 */
+					"/v3/api-docs/**",
+					"/swagger-ui/**"
 			).permitAll()
 			// 추후 예외처리 해야 하는 부분 추가
 			// CSRF 설정 Disable
@@ -104,4 +102,6 @@ public class SecurityConfig {
 		source.registerCorsConfiguration("/**", configuration);
 		return source;
 	}
+
+
 }
