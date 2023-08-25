@@ -1,9 +1,15 @@
 package com.sleepisdead.travelmakerbackend.member.command.domain.aggregate.entity;
 
+import com.sleepisdead.travelmakerbackend.taedy.entity.PlanJoin;
+import com.sleepisdead.travelmakerbackend.taedy.entity.Question;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import static javax.persistence.CascadeType.ALL;
 
 @Entity(name = "Member")
 @Table(name = "member")
@@ -71,6 +77,28 @@ public class Member {
     @Column(name = "preferred_type")
     private String preferredType;
 
+    // 친구 초대, 문의 필드 추가
+    @OneToMany(mappedBy = "member", cascade = ALL)
+    private List<PlanJoin> planJoins = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = ALL)
+    private List<Question> questions = new ArrayList<>();
+
+    public List<PlanJoin> getPlanJoins() {
+        return planJoins;
+    }
+
+    public void setPlanJoins(List<PlanJoin> planJoins) {
+        this.planJoins = planJoins;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
 
     public Member() {}
 
