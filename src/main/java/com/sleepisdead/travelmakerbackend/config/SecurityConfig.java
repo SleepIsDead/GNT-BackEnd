@@ -63,10 +63,11 @@ public class SecurityConfig {
 					/* swagger v3 */
 					"/v1/api-docs/**",
 					"/swagger-ui/**",
+					// Server API
 					"/api/v1/member/**",
-					"/api/v1/plan/**",
-					"/api/v1/map/**",
-					"/api/v1/question/**",
+					"/api/v1/plans/**",
+					"/api/v1/maps/**",
+					"/api/v1/questions/**",
 					"/api/v1/schedules/**"
 			).permitAll()
 			// 추후 예외처리 해야 하는 부분 추가
