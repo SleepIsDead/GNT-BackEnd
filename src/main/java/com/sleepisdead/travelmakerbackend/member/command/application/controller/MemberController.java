@@ -24,7 +24,7 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
-@Api(tags = "Member API")
+@Api(tags = "멤버 관련 기능 API")
 @RestController
 @RequestMapping("/api/v1")
 public class MemberController {

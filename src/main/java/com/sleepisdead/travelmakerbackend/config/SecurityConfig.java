@@ -61,13 +61,8 @@ public class SecurityConfig {
 			.antMatchers("/api/v1/login/**").permitAll()
 			.antMatchers(
 					/* swagger v3 */
-					"/v1/api-docs/**",
-					"/swagger-ui/**",
-					"/api/v1/member/**",
-					"/api/v1/plan/**",
-					"/api/v1/map/**",
-					"/api/v1/question/**",
-					"/api/v1/schedules/**"
+					"/v3/api-docs/**",
+					"/swagger-ui/**"
 			).permitAll()
 			// 추후 예외처리 해야 하는 부분 추가
 			// CSRF 설정 Disable

@@ -11,14 +11,12 @@ import com.sleepisdead.travelmakerbackend.taedy.entity.MapStatus;
 import com.sleepisdead.travelmakerbackend.taedy.repository.MapRepository;
 import com.sleepisdead.travelmakerbackend.taedy.service.ScheduleService;
 import com.sleepisdead.travelmakerbackend.taedy.service.common.ResponseService;
-import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-@Api(tags = {"Schedule API"})
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1")
+@RequestMapping("/api")
 public class ScheduleController {
 
     private final ScheduleService scheduleService;

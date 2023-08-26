@@ -13,10 +13,10 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-@Api(tags = {"MAP API"})
+@Api(tags = {"REST API CONTROLLER"})
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1")
+@RequestMapping("/api")
 public class MapController {
 
     private final MapService mapService;
