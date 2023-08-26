@@ -11,15 +11,17 @@ import com.sleepisdead.travelmakerbackend.taedy.service.MapService;
 import com.sleepisdead.travelmakerbackend.taedy.service.PlanJoinService;
 import com.sleepisdead.travelmakerbackend.taedy.service.PlanService;
 import com.sleepisdead.travelmakerbackend.taedy.service.common.ResponseService;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Api(tags = {"Plan API"})
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class PlanController {
 
     private final PlanService planService;

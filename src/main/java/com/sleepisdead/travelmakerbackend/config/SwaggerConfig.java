@@ -33,7 +33,7 @@ public class SwaggerConfig {
             .consumes(getConsumeContentTypes())
             .produces(getProduceContentTypes())
             .select()
-            .apis(RequestHandlerSelectors.basePackage("com/sleepisdead/travelmakerbackend"))
+            .apis(RequestHandlerSelectors.basePackage("com.sleepisdead.travelmakerbackend"))
             .paths(PathSelectors.any())
             .build()
             .apiInfo(swaggerInfo())
