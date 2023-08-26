@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
-@Api(tags = "로그인 내부 API")
+@Api(tags = "Login API")
 @RestController
 @RequestMapping("/api/v1/login")
 public class LoginController {

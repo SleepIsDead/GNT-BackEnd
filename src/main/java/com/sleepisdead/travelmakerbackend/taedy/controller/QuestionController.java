@@ -6,6 +6,7 @@ import com.sleepisdead.travelmakerbackend.taedy.dto.question.QuestionDto;
 import com.sleepisdead.travelmakerbackend.taedy.dto.question.QuestionInsertRequestDto;
 import com.sleepisdead.travelmakerbackend.taedy.service.QuestionService;
 import com.sleepisdead.travelmakerbackend.taedy.service.common.ResponseService;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,9 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Api(tags = {"Question API"})
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class QuestionController {
 
     private final QuestionService questionService;
