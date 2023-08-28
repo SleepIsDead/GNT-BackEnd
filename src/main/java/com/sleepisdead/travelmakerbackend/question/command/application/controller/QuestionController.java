@@ -1,7 +1,8 @@
 package com.sleepisdead.travelmakerbackend.question.command.application.controller;
 
+import com.sleepisdead.travelmakerbackend.common.ResponseService;
+import com.sleepisdead.travelmakerbackend.common.SingleResult;
 import com.sleepisdead.travelmakerbackend.member.command.domain.aggregate.entity.Member;
-import com.sleepisdead.travelmakerbackend.taedy.dto.common.SingleResult;
 import com.sleepisdead.travelmakerbackend.question.command.application.dto.QuestionDto;
 import com.sleepisdead.travelmakerbackend.question.command.application.dto.QuestionInsertRequestDto;
 import com.sleepisdead.travelmakerbackend.question.command.application.service.QuestionService;

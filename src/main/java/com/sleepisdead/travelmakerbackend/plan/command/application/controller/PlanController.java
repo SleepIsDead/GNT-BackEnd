@@ -1,9 +1,10 @@
 package com.sleepisdead.travelmakerbackend.plan.command.application.controller;
 
+import com.sleepisdead.travelmakerbackend.common.CommonResult;
+import com.sleepisdead.travelmakerbackend.common.ListResult;
+import com.sleepisdead.travelmakerbackend.common.ResponseService;
+import com.sleepisdead.travelmakerbackend.common.SingleResult;
 import com.sleepisdead.travelmakerbackend.member.command.domain.aggregate.entity.Member;
-import com.sleepisdead.travelmakerbackend.taedy.dto.common.CommonResult;
-import com.sleepisdead.travelmakerbackend.taedy.dto.common.ListResult;
-import com.sleepisdead.travelmakerbackend.taedy.dto.common.SingleResult;
 import com.sleepisdead.travelmakerbackend.plan.command.application.dto.PlanDto;
 import com.sleepisdead.travelmakerbackend.plan.command.application.dto.PlanInsertRequestDto;
 import com.sleepisdead.travelmakerbackend.plan.command.application.dto.PlanUpdateRequestDto;

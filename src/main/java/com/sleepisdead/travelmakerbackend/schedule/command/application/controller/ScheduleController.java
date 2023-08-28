@@ -1,8 +1,9 @@
 package com.sleepisdead.travelmakerbackend.schedule.command.application.controller;
 
-import com.sleepisdead.travelmakerbackend.taedy.dto.common.CommonResult;
-import com.sleepisdead.travelmakerbackend.taedy.dto.common.ListResult;
-import com.sleepisdead.travelmakerbackend.taedy.dto.common.SingleResult;
+import com.sleepisdead.travelmakerbackend.common.CommonResult;
+import com.sleepisdead.travelmakerbackend.common.ListResult;
+import com.sleepisdead.travelmakerbackend.common.ResponseService;
+import com.sleepisdead.travelmakerbackend.common.SingleResult;
 import com.sleepisdead.travelmakerbackend.schedule.command.application.dto.ScheduleDto;
 import com.sleepisdead.travelmakerbackend.schedule.command.application.dto.ScheduleInsertRequestDto;
 import com.sleepisdead.travelmakerbackend.schedule.command.application.dto.ScheduleUpdateRequestDto;
