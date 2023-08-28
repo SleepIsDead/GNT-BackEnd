@@ -1,8 +1,7 @@
 package com.sleepisdead.travelmakerbackend.member.command.domain.aggregate.entity;
 
-import com.sleepisdead.travelmakerbackend.taedy.entity.PlanJoin;
-import com.sleepisdead.travelmakerbackend.taedy.entity.Question;
-import org.hibernate.annotations.ColumnDefault;
+import com.sleepisdead.travelmakerbackend.planjoin.command.domain.aggregate.entity.PlanJoin;
+import com.sleepisdead.travelmakerbackend.question.command.domain.aggregate.entity.Question;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
