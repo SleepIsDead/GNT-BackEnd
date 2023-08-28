@@ -13,6 +13,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 	@Query("SELECT new com.sleepisdead.travelmakerbackend.member.command.application.dto.MemberSimpleDTO(m.memberId, m.nickname, m.imageSource) FROM Member m WHERE m.memberId = :memberId")
     MemberSimpleDTO findMemberByIdSimple(long memberId);
 
+	Member findByMemberId(Long memberId);
+
 	List<Member> findByNickname(String nickname);
 
 	@Query("SELECT m FROM Member AS m WHERE m.socialLogin LIKE :socialLogin AND m.socialId LIKE :socialId")

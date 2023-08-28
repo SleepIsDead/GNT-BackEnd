@@ -1,5 +1,6 @@
 package com.sleepisdead.travelmakerbackend.member.command.domain.aggregate.entity;
 
+import com.sleepisdead.travelmakerbackend.common.BaseTimeEntity;
 import com.sleepisdead.travelmakerbackend.planjoin.command.domain.aggregate.entity.PlanJoin;
 import com.sleepisdead.travelmakerbackend.question.command.domain.aggregate.entity.Question;
 
@@ -12,19 +13,10 @@ import static javax.persistence.CascadeType.ALL;
 
 @Entity(name = "Member")
 @Table(name = "member")
-@SequenceGenerator(
-        name = "member_sequence_generator",
-        sequenceName = "sequence_member_id",
-        initialValue = 1,
-        allocationSize = 50
-)
-public class Member {
+public class Member extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "member_sequence_generator"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
     private long memberId;
 
@@ -64,12 +56,6 @@ public class Member {
     @Column(name = "is_deleted", columnDefinition = "varchar (2)", nullable = false)
     private String isDeleted;
 
-    @Column(name = "sign_up_date", nullable = false)
-    private LocalDateTime signUpDate;
-
-    @Column(name = "deleted_date")
-    private LocalDateTime deletedDate;
-
     @Column(name = "preferred_location")
     private String preferredLocation;
 
@@ -104,7 +90,6 @@ public class Member {
     public Member(long memberId, String nickname, String imageSource, int reportCount,
                   String socialLogin, String socialId, String accessToken, long accessTokenExpireDate, String refreshToken,
                   long refreshTokenExpireDate, String email, String gender, String isDeleted,
-                  LocalDateTime signUpDate, LocalDateTime deletedDate,
                   String preferredLocation, String preferredType) {
         this.memberId = memberId;
         this.nickname = nickname;
@@ -119,8 +104,6 @@ public class Member {
         this.email = email;
         this.gender = gender;
         this.isDeleted = isDeleted;
-        this.signUpDate = signUpDate;
-        this.deletedDate = deletedDate;
         this.preferredLocation = preferredLocation;
         this.preferredType = preferredType;
     }
@@ -163,22 +146,6 @@ public class Member {
 
     public void setIsDeleted(String isDeleted) {
         this.isDeleted = isDeleted;
-    }
-
-    public LocalDateTime getSignUpDate() {
-        return signUpDate;
-    }
-
-    public void setSignUpDate(LocalDateTime signUpDate) {
-        this.signUpDate = signUpDate;
-    }
-
-    public LocalDateTime getDeletedDate() {
-        return deletedDate;
-    }
-
-    public void setDeletedDate(LocalDateTime deletedDate) {
-        this.deletedDate = deletedDate;
     }
 
     public String getPreferredLocation() {
@@ -278,8 +245,6 @@ public class Member {
             ", email='" + email + '\'' +
             ", gender='" + gender + '\'' +
             ", isDeleted='" + isDeleted + '\'' +
-            ", signUpDate=" + signUpDate +
-            ", deletedDate=" + deletedDate +
             ", preferredLocation='" + preferredLocation + '\'' +
             ", preferredType='" + preferredType + '\'' +
             '}';
