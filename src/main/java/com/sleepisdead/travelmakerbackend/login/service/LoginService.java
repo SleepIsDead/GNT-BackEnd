@@ -145,22 +145,6 @@ public class LoginService {
 		foundmember.setRefreshTokenExpireDate(oauthToken.getRefresh_token_expires_in() + System.currentTimeMillis());
 		foundmember.setAccessTokenExpireDate(oauthToken.getExpires_in() + System.currentTimeMillis());
 
-//		Date accessExpireDate = new Date(foundmember.getAccessTokenExpireDate());
-//
-//		if(accessExpireDate.before(new Date())) {
-//
-//			RenewTokenDTO renewedToken = renewKakaoToken(foundmember);
-//
-//			if(renewedToken.getRefresh_token() != null) {
-//
-//				foundmember.setRefreshToken(renewedToken.getRefresh_token());
-//				foundmember.setRefreshTokenExpireDate(renewedToken.getRefresh_token_expires_in() + System.currentTimeMillis());
-//			}
-//
-//			foundmember.setAccessToken(renewedToken.getAccess_token());
-//			foundmember.setAccessTokenExpireDate(renewedToken.getExpires_in() + System.currentTimeMillis());
-//		}
-
 		return tokenProvider.generateMemberTokenDTO(foundmember);
 	}
 

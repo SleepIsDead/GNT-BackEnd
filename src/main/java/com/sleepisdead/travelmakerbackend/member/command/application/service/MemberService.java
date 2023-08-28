@@ -2,7 +2,6 @@ package com.sleepisdead.travelmakerbackend.member.command.application.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sleepisdead.travelmakerbackend.login.dto.RenewTokenDTO;
 import com.sleepisdead.travelmakerbackend.member.command.application.dto.MemberSimpleDTO;
 import com.sleepisdead.travelmakerbackend.member.command.domain.aggregate.entity.Member;
 import com.sleepisdead.travelmakerbackend.member.command.domain.repository.MemberRepository;
@@ -18,12 +17,11 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import com.sleepisdead.travelmakerbackend.member.command.application.dto.MemberDTO;
 
-import java.util.Date;
+
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +44,6 @@ public class MemberService {
 	public long registNewUser(MemberDTO newMember) {
 
 		newMember.setNickname("새로운회원" + (Math.random() * 100 + 1));
-		newMember.setLevel(1);
 		newMember.setIsDeleted("N");
 
 		return memberRepository.save(modelMapper.map(newMember, Member.class)).getMemberId();
@@ -54,7 +51,7 @@ public class MemberService {
 
 	public MemberDTO findMemberById(long memberId) {
 
-		Member member = memberRepository.findById(memberId).get();
+		Member member = memberRepository.findByMemberId(memberId);
 
 		return modelMapper.map(member, MemberDTO.class);
 	}
@@ -63,7 +60,7 @@ public class MemberService {
 
 		MemberSimpleDTO member = memberRepository.findMemberByIdSimple(memberId);
 
-		member.setLinkToMyPage("/mypage/" + member.getMemberId());  //마이페이지 링크 기억안나서 아직 예시
+		member.setLinkToMyPage("/mypage/" + member.getMemberId());
 
 		return member;
 	}
@@ -97,9 +94,7 @@ public class MemberService {
 				break;
 
 			case "deactivate":
-
 				RestTemplate rt = new RestTemplate();
-
 				/* 카카오 로그인일 때 */
 				if (foundMember.getSocialLogin().equals("KAKAO")) {
 
@@ -128,95 +123,14 @@ public class MemberService {
 
 					foundMember.setIsDeleted("Y");
 					break;
-
-					/* 네이버 로그인일 때 */
-				} else if (foundMember.getSocialLogin().equals("NAVER")) {
-
-					/* 갱신 먼저 */
-					Date expireDate = new Date(foundMember.getAccessTokenExpireDate());
-
-					if (expireDate.before(new Date())) {
-
-						RestTemplate rtForRenew = new RestTemplate();
-
-						HttpHeaders headers = new HttpHeaders();
-
-						MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-						params.add("client_id", System.getenv("NaverClientIdKey"));
-						params.add("client_secret", System.getenv("NaverClientSecretKey"));
-						params.add("refresh_token", foundMember.getRefreshToken());
-						params.add("grant_type", "refresh_token");
-
-						HttpEntity<MultiValueMap<String, String>> naverRenewRequest =
-							new HttpEntity<>(params, headers);
-
-						ResponseEntity<String> naverRenewResponses = rtForRenew.exchange(
-							"https://nid.naver.com/oauth2.0/token",
-							HttpMethod.GET,
-							naverRenewRequest,
-							String.class
-						);
-
-						ObjectMapper objectMapper = new ObjectMapper();
-						RenewTokenDTO renewToken = null;
-						try {
-							renewToken = objectMapper.readValue(naverRenewResponses.getBody(), RenewTokenDTO.class);
-						} catch (JsonProcessingException e) {
-							e.printStackTrace();
-						}
-
-						if (renewToken.getRefresh_token() != null) {
-
-							foundMember.setRefreshToken(renewToken.getRefresh_token());
-							foundMember.setRefreshTokenExpireDate(
-								(1000 * 60 * 60 * 6) + System.currentTimeMillis());
-						}
-
-						foundMember.setAccessToken(renewToken.getAccess_token());
-						foundMember.setAccessTokenExpireDate(
-							renewToken.getExpires_in() + System.currentTimeMillis());
-
-					}
-
+				}
 					/* 업데이트 된 멤버 다시 가져옴 */
 					foundMember = memberRepository.findById(memberId).get();
-
 					/* 탈퇴 요청 */
 					HttpHeaders headers = new HttpHeaders();
-
-					MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-					params.add("client_id", System.getenv("NaverClientIDKey"));
-					params.add("client_secret", System.getenv("NaverClientSecretKey"));
-					params.add("access_token", foundMember.getAccessToken());
-					params.add("grant_type", "delete");
-
-					HttpEntity<MultiValueMap<String, String>> naverDeactivateRequest =
-						new HttpEntity<>(headers, params);
-
-					ResponseEntity<String> naverDeactivateResponse = rt.exchange(
-						"https://nid.naver.com/oauth2.0/token",
-						HttpMethod.POST,
-						naverDeactivateRequest,
-						String.class
-					);
-
-					System.out.println(naverDeactivateResponse.getBody());
-
-					String naverDeactivateResult = "";
-
-					try {
-						naverDeactivateResult = objectMapper.readValue(
-							naverDeactivateResponse.getBody(),
-							String.class);
-					} catch (JsonProcessingException e) {
-						throw new RuntimeException(e);
-					}
-
-					foundMember.setIsDeleted("Y");
-					break;
-				}
 		}
 	}
+
 
 	@Transactional
 	public void deleteMember(long memberId) {

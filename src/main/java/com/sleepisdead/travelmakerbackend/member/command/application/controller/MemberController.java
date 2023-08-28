@@ -97,8 +97,8 @@ public class MemberController {
 
     @ApiOperation(value = "멤버 프로필 수정")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "수정성공..."),
-            @ApiResponse(code = 400, message = "잘못된 파라미터....")
+            @ApiResponse(code = 201, message = "수정 성공"),
+            @ApiResponse(code = 400, message = "수정 실패")
     })
     @PutMapping("/members/{memberId}")
     public ResponseEntity<?> modifyMember(MemberDTO modifyInfo, @PathVariable long memberId, @RequestParam String type) {

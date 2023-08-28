@@ -1,5 +1,10 @@
 package com.sleepisdead.travelmakerbackend.member.command.application.dto;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor
 public class MemberSimpleDTO {
 
     private long memberId;
@@ -11,7 +16,6 @@ public class MemberSimpleDTO {
     private String linkToMyPage;
 
 
-    public MemberSimpleDTO() {}
 
     public MemberSimpleDTO(long memberId, String nickname, String imageSource) {
         this.memberId = memberId;
