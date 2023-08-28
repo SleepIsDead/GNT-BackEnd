@@ -1,9 +1,5 @@
 package com.sleepisdead.travelmakerbackend.common;
 
-import com.sleepisdead.travelmakerbackend.taedy.dto.common.CommonResponse;
-import com.sleepisdead.travelmakerbackend.taedy.dto.common.CommonResult;
-import com.sleepisdead.travelmakerbackend.taedy.dto.common.ListResult;
-import com.sleepisdead.travelmakerbackend.taedy.dto.common.SingleResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
