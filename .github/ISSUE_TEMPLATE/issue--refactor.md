@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-# Issue: 🐵FEATURE
+# Issue: 🐵REFACTOR
 
 ## 🎈Description
 <!-- 설명을 작성하시오. -->
