@@ -36,7 +36,6 @@ public class TokenProvider implements InitializingBean {
 	private final long refreshTokenValidityInMilliseconds; //리프레시 토큰
 	private Key key;
 
-
 	//yml 에서 secret 참조
 	public TokenProvider(@Value("${jwt.secret}") String secret,
 						 @Value("${jwt.token-validity-in-seconds}") long tokenValidityInSeconds){
@@ -68,6 +67,7 @@ public class TokenProvider implements InitializingBean {
 				.setExpiration(validity) // set Expire Time 해당 옵션 안넣으면 expire안함
 				.compact();
 	}
+
 
 	public String createRefreshToken(){
 		Date now = new Date();
@@ -113,24 +113,42 @@ public class TokenProvider implements InitializingBean {
 		return new UsernamePasswordAuthenticationToken(principal, token, authorities);
 	}
 
+	private String getUserId(String accessToken) {
+		return Jwts
+				.parserBuilder()
+				.setSigningKey(key)
+				.build()
+				.parseClaimsJws(accessToken)
+				.getBody()
+				.getSubject();
+	}
+
 	// 토큰의 유효성 검증을 수행
-	public boolean validateToken(String token) {
+	public boolean validateToken(String token) throws ExpiredJwtException {
 		try {
 			Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
 			return true;
 		} catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
-
-			logger.info("잘못된 JWT 서명입니다.");
+			logger.info("[TokenProvider] Malformed JWT Sign");
+			throw new TokenException("잘못된 JWT 서명입니다.");
 		} catch (ExpiredJwtException e) {
-
-			logger.info("만료된 JWT 토큰입니다.");
+			logger.info("[TokenProvider] Expired JWT Token");
+			throw new TokenException("만료된 JWT 토큰입니다.");
 		} catch (UnsupportedJwtException e) {
-
-			logger.info("지원되지 않는 JWT 토큰입니다.");
+			logger.info("[TokenProvider] Unsupported JWT token");
+			throw new TokenException("지원되지 않는 JWT 토큰입니다.");
 		} catch (IllegalArgumentException e) {
-
-			logger.info("JWT 토큰이 잘못되었습니다.");
+			logger.info("[TokenProvider] JWT Token Illegal");
+			throw new TokenException("JWT 토큰이 잘못되었습니다.");
 		}
-		return false;
+	}
+
+
+	private Claims parseClaims(String accessToken) {
+		try {
+			return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(accessToken).getBody();
+		} catch (ExpiredJwtException e) {
+			return e.getClaims();
+		}
 	}
 }
