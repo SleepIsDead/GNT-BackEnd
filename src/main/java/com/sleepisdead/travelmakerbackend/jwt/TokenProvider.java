@@ -32,6 +32,7 @@ public class TokenProvider implements InitializingBean {
 	private final Logger logger = LoggerFactory.getLogger(TokenProvider.class);
 	private static final String AUTHORITIES_KEY = "auth";
 	private final String secret;
+	private static final String BEARER_TYPE = "bearer";
 	private final long tokenValidityInMilliseconds; // 엑세스토큰
 	private final long refreshTokenValidityInMilliseconds; //리프레시 토큰
 	private Key key;
@@ -49,6 +50,27 @@ public class TokenProvider implements InitializingBean {
 		byte[] keyBytes = Decoders.BASE64.decode(secret);
 		this.key= Keys.hmacShaKeyFor(keyBytes);
 	}
+
+	public AccessTokenDTO generateMemberTokenDTO(MemberDTO foundmember) {
+		logger.info("[TokenProvider] generateTokenDto Start ===================================");
+
+		Claims claims = Jwts
+				.claims()
+				.setSubject(String.valueOf(foundmember.getMemberId()));
+		long now = (new Date()).getTime();
+
+		// Access Token 생성
+		Date accessTokenExpiresIn = new Date(now + tokenValidityInMilliseconds);
+		String jwtToken = Jwts.builder()
+				.setClaims(claims)
+				.setExpiration(accessTokenExpiresIn)
+				.signWith(key, SignatureAlgorithm.HS512)
+				.compact();
+
+		return new AccessTokenDTO(BEARER_TYPE, foundmember.getMemberId(), jwtToken,
+				accessTokenExpiresIn.getTime());
+	}
+
 
 	//토큰생성
 	public String createAccessToken(Authentication authentication) {
