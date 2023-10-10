@@ -56,20 +56,34 @@ public class SecurityConfig {
 
 		http
 			.csrf().disable()
+			//토큰사용시 csrf 설정 Disable
+
+				.exceptionHandling()
+				.authenticationEntryPoint(jwtAuthenticationEntryPoint)
+				.accessDeniedHandler(jwtAccessDeniedHandler)
+				.and()
+				// exception handling
+
+				.sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				// 세션을 사용하지 않기 때문에 STATELESS로 설정
+
+
+			.and()
 			.authorizeRequests()
 			.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 			.antMatchers("/api/v1/login/**").permitAll()
-			.antMatchers(
-					/* swagger v3 */
-					"/v1/api-docs/**",
-					"/swagger-ui/**",
-					// Server API
-					"/api/v1/member/**",
-					"/api/v1/plans/**",
-					"/api/v1/maps/**",
-					"/api/v1/questions/**",
-					"/api/v1/schedules/**"
-			).permitAll()
+			.antMatchers( //swagger
+						"/swagger-ui/**",
+						"/v2/api-docs",
+						"/swagger-resources/**",
+						"/webjars/**").permitAll()
+			.antMatchers(// Server API
+						"/api/v1/member/**",
+						"/api/v1/plans/**",
+						"/api/v1/maps/**",
+						"/api/v1/questions/**",
+						"/api/v1/schedules/**").permitAll()
 			// 추후 예외처리 해야 하는 부분 추가
 			// CSRF 설정 Disable
 			.and()

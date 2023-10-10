@@ -79,6 +79,15 @@ For building and running the application you need:
    **결론 : 회의록이나, 주요내용 정리를 해서, 의견과, 개발에 대한 근거를 확실히 해야함.**
 <br><br>
 ---
+## 개선사항
+1. Login
+   Security Filter 개선하여 토큰없이도 접근 가능(로그인, 회원가입)
+   토큰 provider 개선하여 토큰 획득과정 간소화
+2. Member
+   맴버엔티티에 개인정보 최소화
+   회원가입시, 소셜아이디1개가 1개의 개정으로 분리됨 (추후 카카오 테스트 예정)
+
+
 ## directory tree
 ```bash
 

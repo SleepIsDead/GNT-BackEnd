@@ -16,9 +16,4 @@ public class BeanConfiguration {
         return new ModelMapper();
     }
 
-	@Bean
-	public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
-		return new InMemoryUserDetailsManager();
-	}
-
 }

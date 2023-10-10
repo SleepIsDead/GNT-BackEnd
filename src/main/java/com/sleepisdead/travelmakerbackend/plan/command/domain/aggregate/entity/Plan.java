@@ -40,10 +40,10 @@ public class Plan extends BaseTimeEntity {
     private String planImage;
 
     @OneToMany(mappedBy = "plan")
-    private List<Schedule> schedules = new ArrayList<>();
+    private List<Schedule> schedules;
 
     @OneToMany(mappedBy = "plan", cascade = ALL)
-    private List<PlanJoin> planJoins = new ArrayList<>();
+    private List<PlanJoin> planJoins;
 
     public void addPlanJoins(PlanJoin planJoin) {
         planJoins.add(planJoin);

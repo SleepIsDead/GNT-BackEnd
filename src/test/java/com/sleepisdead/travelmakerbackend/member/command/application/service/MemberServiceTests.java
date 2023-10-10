@@ -5,13 +5,14 @@ import com.sleepisdead.travelmakerbackend.member.command.application.dto.MemberD
 import com.sleepisdead.travelmakerbackend.member.command.application.dto.MemberSimpleDTO;
 import com.sleepisdead.travelmakerbackend.member.command.domain.aggregate.entity.Member;
 import com.sleepisdead.travelmakerbackend.member.command.domain.repository.MemberRepository;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -64,7 +65,7 @@ class MemberServiceTests {
                 .preferredType("DEACTIVATE")
                 .build();
 
-        long memberId1 = memberService.registNewUser(memberDTO1);
+        Long memberId1 = memberService.registNewUser(memberDTO1);
         Long memberId2 = memberService.registNewUser(memberDTO2);
 
         //when
@@ -109,6 +110,7 @@ class MemberServiceTests {
 
     @Test
     @DisplayName("회원 프로필 불러오기 (심플DTO)")
+    @Transactional
     void findMemberByIdSimple() {
         //given
         MemberDTO memberDTO1 = MemberDTO.builder()
@@ -135,7 +137,46 @@ class MemberServiceTests {
     }
 
     @Test
+    @DisplayName("모든 회원 보기")
+    @Transactional
     void findAllMembers() {
+        //given
+        MemberDTO memberDTO1 = MemberDTO.builder()
+                .reportCount(0)
+                .socialLogin("test1")
+                .socialId("test2")
+                .accessToken("testToken")
+                .accessTokenExpireDate(123123)
+                .refreshToken("reToken")
+                .refreshTokenExpireDate(123123)
+                .email("test3@test.com")
+                .preferredLocation("EDIT")
+                .preferredType("DEACTIVATE")
+                .build();
+        MemberDTO memberDTO2 = MemberDTO.builder()
+                .reportCount(0)
+                .socialLogin("test3")
+                .socialId("test4")
+                .accessToken("testToken")
+                .accessTokenExpireDate(234234)
+                .refreshToken("reToken")
+                .refreshTokenExpireDate(234234)
+                .email("test4@test.com")
+                .preferredLocation("EDIT")
+                .preferredType("DEACTIVATE")
+                .build();
+
+        Long memberId1 = memberService.registNewUser(memberDTO1);
+        Long memberId2 = memberService.registNewUser(memberDTO2);
+
+        //when
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<MemberDTO> memberDTOPage = memberService.findAllMembers(pageable);
+
+        //then
+        assertNotNull(memberDTOPage);
+        assertFalse(memberDTOPage.isEmpty());
+        assertEquals(memberDTOPage.getTotalElements(),2);
     }
 
     @Test
