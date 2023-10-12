@@ -88,7 +88,7 @@ For building and running the application you need:
    회원가입시, 소셜아이디1개가 1개의 개정으로 분리됨 (추후 카카오 테스트 예정)
 3. Security Filter
    초기구현에서 swagger 적용에 실패했지만 이후에는 적용이 가능함
-
+4. 프론트 적용사항에 따라 백엔드 개선사항이 있을 수 있음
 
 ## directory tree
 ```bash
