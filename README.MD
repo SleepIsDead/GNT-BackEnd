@@ -89,7 +89,7 @@ For building and running the application you need:
 3. Security Filter
    초기구현에서 swagger 적용에 실패했지만 이후에는 적용이 가능함
 4. 프론트 적용사항에 따라 백엔드 개선사항이 있을 수 있음
-
+5. 향후 aws 사용하기위해 계정 신청함 (10/13)
 ## directory tree
 ```bash
 
